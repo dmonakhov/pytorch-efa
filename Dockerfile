@@ -40,6 +40,5 @@ RUN apt-get update -y && \
 ENV OMPI_MCA_pml=^ucx
 ENV OMPI_MCA_coll=^ucc
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/efa/lib
-COPY utils/*.sh /workspace/
 
 LABEL org.opencontainers.image.authors="monakhov@amazon.com"
