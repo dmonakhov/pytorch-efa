@@ -1,0 +1,5 @@
+#!/bin/bash
+
+wdir=$(dirname `realpath $0`)
+source activate pytorch
+exec "$@"
