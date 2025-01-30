@@ -139,7 +139,15 @@ if __name__ == "__main__":
     parser.add_argument('-i', '--iters', type=int, default=10000)
     parser.add_argument('-t', '--dtype', choices=data_types.keys(), default="float32")
     parser.add_argument('-T', '--timeout', type=int, default=300)
+    parser.add_argument('-E', '--efa-only', action='store_true')
     args = parser.parse_args()
 
     log = setup_logger()
+
+    if args.efa_only:
+        os.environ['NCCL_NET'] = 'AWS Libfabric'
+        os.environ['NCCL_P2P_DISABLE']='1'
+        os.environ['NCCL_SHM_DISABLE']='1'
+        os.environ['NCCL_NVLS_ENABLE']='0'
+
     init_process(1 << args.log_size, data_types[args.dtype], args.iters, args.timeout)
